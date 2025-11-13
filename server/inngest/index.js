@@ -149,6 +149,6 @@ export const functions = [
     syncUserUpdation,
     syncWorkspaceCreation,
     syncWorkspaceUpdation,
-    syncUserDeletion,
+    syncWorkspaceDeletion,
     syncWorkspaceMemberCreation
 ];
