@@ -96,12 +96,12 @@ export const UpdateProject = async (req, res) => {
             if(!project){
                 return res.status(404).json({ message : "Project not found"});
             }else if(project.team_lead !== userId){
-                return res.status(403).json({ message: " You don;t have permisssion  to update projects in the  workspaces"});
+                return res.status(403).json({ message: " You don't have permisssion  to update projects in the  workspaces"});
             }
         }
         const project  = await prisma.project.update({
             where : {id},
-            date: {
+            data: {
                 workspaceId,
                 description,
                 name,

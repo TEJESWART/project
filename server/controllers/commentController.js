@@ -5,7 +5,7 @@ import prisma from "../configs/prisma.js";
 // add comment
 export const addComment = async(req, res)=>{
     try{
-        const {userId} = awaitreeq.auth();
+        const {userId} = await req.auth();
         const {content, taskId} = req.body
 
         //check if the user is project memeber
@@ -25,7 +25,7 @@ export const addComment = async(req, res)=>{
             return res.status(403).json({ message: "You are not member of this project"});
         }
         const comment = await prisma.comment.create({
-            data: {taskId, content , userId},
+            data: {taskId, content, userId},
             include: {user: true}
         })
         res.json({comment})
@@ -43,6 +43,7 @@ export const getTaskComments = async(req, res)=>{
         const comments = await prisma.comment.findMany({
             where: {taskId}, include:{user:true}
         })
+        res.json({comments})
 
     } catch(error){
         console.log(error);
